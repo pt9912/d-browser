@@ -32,6 +32,7 @@ Dieses Strukturmuster wird fuer `d-browser` uebernommen und um Referenz-Clients 
 * Code und Klassen sollen testfreundlich entworfen werden, mit klaren Verantwortlichkeiten, geringer Kopplung und austauschbaren Abhaengigkeiten.
 * Fuer reproduzierbare Entwicklungs-, Test- und Integrationsumgebungen wird Docker bevorzugt eingesetzt.
 * Plattformabhaengige Toolchains sollen pragmatisch behandelt werden; dabei koennen auch Community-Loesungen genutzt werden, wenn sie fuer den vorgesehenen Zweck ausreichend tragfaehig sind.
+* Unterschiedliche Transportprotokolle wie REST und gRPC sollen auf denselben fachlichen Anwendungsfaellen aufsetzen.
 
 ## 3.1 Testbarkeit im Design
 
@@ -52,20 +53,16 @@ d-browser/
 ├── hexagon/
 │   ├── core/
 │   ├── ports/
-│   ├── application/
-│   └── profiling/
+│   └── application/
 ├── adapters/
 │   ├── driven/
 │   │   ├── source-common/
-│   │   ├── source-postgresql/
-│   │   ├── source-mysql/
-│   │   ├── source-sqlite/
 │   │   ├── source-d-migrate/
-│   │   ├── formats/
-│   │   └── streaming/
+│   │   └── formats/
 │   └── driving/
 │       ├── cli/
-│       └── service-rest/
+│       ├── service-rest/
+│       └── service-grpc/
 ├── examples/
 │   ├── flutter/
 │   ├── maui/
@@ -82,12 +79,13 @@ d-browser/
 * `hexagon/core` enthaelt die fachlichen Kernmodelle und Regeln zur Projektion relationaler Strukturen.
 * `hexagon/ports` enthaelt die abstrahierten Schnittstellen fuer Quellen, Tree-Aufbau, Datensatzzugriff und Ausgabe.
 * `hexagon/application` enthaelt Use Cases und Orchestrierung zwischen Ports und Domaene.
-* `hexagon/profiling` ist fuer Querschnittsfunktionen wie Performance-Messung oder Diagnose vorgesehen, sofern dafuer ein eigenes Modul benoetigt wird.
 
 ### 5.2 Adapter
 
-* `adapters/driven/*` enthaelt konkrete technische Anbindungen fuer Datenquellen, Integrationen sowie Format- und Streaming-Unterstuetzung.
-* `adapters/driving/cli` und `adapters/driving/service-rest` enthalten die technischen Einstiegspunkte fuer Benutzung und externe Ansteuerung.
+* `adapters/driven/source-d-migrate` ist der bevorzugte Integrationspfad fuer relationale Quellen, sofern `d-migrate` die benoetigten Datenbankadapter bereits als wiederverwendbare Libraries bereitstellt.
+* `adapters/driven/formats` enthaelt browser-spezifische technische Formatadaptionen, insbesondere fuer Ausgabe und Serialisierung.
+* `adapters/driving/cli`, `adapters/driving/service-rest` und `adapters/driving/service-grpc` enthalten die technischen Einstiegspunkte fuer Benutzung und externe Ansteuerung.
+* REST- und gRPC-Adapter sollen dieselben fachlichen Anwendungsfaelle adressieren und sich nur im Transport und Vertragsformat unterscheiden.
 
 ### 5.3 Referenz-Clients
 
@@ -105,3 +103,6 @@ Sie dienen der Validierung von API, Integrationsfaehigkeit und Monorepo-Zuschnit
 * Weitergehende Detailentscheidungen sollten bei Bedarf in ADRs oder ergaenzenden Designnotizen dokumentiert werden.
 * Lokale Infrastruktur, Integrationsabhaengigkeiten und wiederholbare Entwicklungsumgebungen sollen nach Moeglichkeit ueber Docker bereitgestellt werden.
 * Fuer MAUI-bezogene Entwicklungs- und Validierungsschritte koennen Linux-basierte Community-Ansaetze wie GTK-basierte Renderpfade beruecksichtigt werden, sofern ihre Einsatzgrenzen transparent bleiben.
+* Falls sowohl REST als auch gRPC angeboten werden, sollen gemeinsame Service- und Use-Case-Schichten unterhalb der Protokolladapter wiederverwendet werden.
+* Direkte datenbankspezifische Source-Adapter in `d-browser` sind nur dann vorgesehen, wenn `d-migrate` die benoetigte Funktionalitaet nicht in ausreichend wiederverwendbarer Form bereitstellt oder ein begruendeter technischer Sonderfall dies erforderlich macht.
+* Zusaetzliche Module wie `profiling` oder `streaming` sollen erst aufgenommen werden, wenn dafuer ein klarer fachlicher oder technischer Bedarf nachgewiesen ist.

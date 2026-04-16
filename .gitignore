@@ -1,0 +1,60 @@
+# Local tooling
+.codex
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Kotlin / Gradle
+.gradle/
+build/
+out/
+**/build/
+**/out/
+
+# Java / Kotlin artifacts
+*.class
+*.jar
+*.war
+*.ear
+
+# Node / SvelteKit
+node_modules/
+.svelte-kit/
+dist/
+coverage/
+**/node_modules/
+**/.svelte-kit/
+**/dist/
+**/coverage/
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+**/.dart_tool/
+
+# .NET / MAUI
+bin/
+obj/
+**/bin/
+**/obj/
+*.user
+*.suo
+
+# Test and reports
+reports/
+test-results/
+**/reports/
+**/test-results/

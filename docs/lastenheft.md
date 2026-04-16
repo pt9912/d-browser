@@ -2,7 +2,7 @@
 
 **Projekt:** d-browser
 **Dokumenttyp:** Lastenheft
-**Version:** 1.7
+**Version:** 1.8
 **Stand:** 16.04.2026
 **Status:** Entwurf
 **Autor:** OpenAI / ChatGPT
@@ -16,7 +16,7 @@
 | Feld         | Wert                 |
 | ------------ | -------------------- |
 | Dokumentname | Lastenheft d-browser |
-| Version      | 1.7                  |
+| Version      | 1.8                  |
 | Datum        | 16.04.2026           |
 | Status       | Entwurf              |
 | Autor        | OpenAI / ChatGPT     |
@@ -38,6 +38,7 @@
 | 1.5     | 16.04.2026 | Anforderungen atomarisiert, Lastenheft bereinigt, Abnahme und Plattformgrenzen geschärft | OpenAI / Codex |
 | 1.6     | 16.04.2026 | Docker als Entwicklungs- und Integrationsrandbedingung ergänzt | OpenAI / Codex |
 | 1.7     | 16.04.2026 | MAUI-Plattformannahmen für Linux-Entwicklung präzisiert | OpenAI / Codex |
+| 1.8     | 16.04.2026 | gRPC-Service als zusätzliche Schnittstelle ergänzt | OpenAI / Codex |
 
 ---
 
@@ -105,7 +106,7 @@ Es besteht Bedarf an einem Werkzeug, das relationale Modelle quellenunabhängig 
 `d-browser` soll:
 
 1. mehrere relationale Datenquellen unterstützen
-2. als Service über eine REST-Schnittstelle verfügbar sein
+2. als Service über REST- und gRPC-Schnittstellen verfügbar sein
 3. Pagination und Lazy Loading bereitstellen
 4. n:m-Beziehungen gesondert behandeln
 5. über eine stabile API in unterschiedliche UI-Technologien integrierbar sein
@@ -162,7 +163,7 @@ Es besteht fachlich aus folgenden Kernbereichen:
    Umwandlung relationaler Graphstrukturen in kontrollierte Navigationsbäume
 
 4. **Ausgabe / Bereitstellung**
-   Bereitstellung über JSON, YAML, CLI und optional API-basierte Ansteuerung
+   Bereitstellung über JSON, YAML, CLI sowie REST- und gRPC-basierte Ansteuerung
 
 5. **Referenz-Clients**
    Beispielhafte UIs in Flutter, MAUI und SvelteKit zur Demonstration und Validierung der Schnittstellen
@@ -188,6 +189,7 @@ Es besteht fachlich aus folgenden Kernbereichen:
 * YAML
 * CLI
 * REST-API
+* gRPC-Service
 
 ## 6.3 Konsumenten und Referenz-Clients
 
@@ -274,6 +276,8 @@ Produktionsreife Endanwenderoberflächen sind nicht Bestandteil der ersten Ausba
 
 **LF-025** Jeder Referenz-Client muss mindestens das Laden einer Datensatz- oder Tabellenansicht über eine definierte Schnittstelle oder einen definierten Service demonstrieren können.
 
+**LF-026** Servicebasierte Integrationen sollen wahlweise über REST oder gRPC angebunden werden können.
+
 ---
 
 # 8 Technische Anforderungen
@@ -284,35 +288,37 @@ Produktionsreife Endanwenderoberflächen sind nicht Bestandteil der ersten Ausba
 
 **LT-002** Externe Datenquellen und Ausgabeformate müssen über dokumentierte technische Schnittstellen angebunden werden.
 
-**LT-003** Technische Einstiegspunkte wie CLI oder Services dürfen die Fachlogik nicht duplizieren.
+**LT-003** Technische Einstiegspunkte wie CLI, REST-Service oder gRPC-Service dürfen die Fachlogik nicht duplizieren.
+
+**LT-004** REST- und gRPC-Schnittstellen müssen auf denselben fachlichen Anwendungsfällen aufsetzen können.
 
 ## 8.2 Erweiterbarkeit und Testbarkeit
 
-**LT-004** Neue Quellen oder Ausgabeformate müssen integrierbar sein, ohne die fachliche Kernlogik grundlegend umzubauen.
+**LT-005** Neue Quellen oder Ausgabeformate müssen integrierbar sein, ohne die fachliche Kernlogik grundlegend umzubauen.
 
-**LT-005** Die Logik zur Projektion und Navigation relationaler Strukturen muss isoliert testbar sein.
+**LT-006** Die Logik zur Projektion und Navigation relationaler Strukturen muss isoliert testbar sein.
 
-**LT-006** Fehler beim Laden, Mappen, Navigieren oder Exportieren müssen nachvollziehbar und reproduzierbar gemeldet werden.
+**LT-007** Fehler beim Laden, Mappen, Navigieren oder Exportieren müssen nachvollziehbar und reproduzierbar gemeldet werden.
 
 ## 8.3 Veröffentlichbare Bibliotheken
 
-**LT-007** Die dafür vorgesehenen Bibliotheken von `d-browser` müssen so gebaut und versioniert werden, dass sie über Maven Central veröffentlicht und als reguläre Maven-/Gradle-Abhängigkeiten eingebunden werden können.
+**LT-008** Die dafür vorgesehenen Bibliotheken von `d-browser` müssen so gebaut und versioniert werden, dass sie über Maven Central veröffentlicht und als reguläre Maven-/Gradle-Abhängigkeiten eingebunden werden können.
 
-**LT-008** Veröffentlichbare Bibliotheken müssen reproduzierbare Build-Artefakte, versionierte Releases, POM-Metadaten sowie Source- und Javadoc-Artefakte bereitstellen.
+**LT-009** Veröffentlichbare Bibliotheken müssen reproduzierbare Build-Artefakte, versionierte Releases, POM-Metadaten sowie Source- und Javadoc-Artefakte bereitstellen.
 
-**LT-009** Veröffentlichbare Bibliotheken müssen über eindeutige Group- und Artifact-IDs verfügen.
+**LT-010** Veröffentlichbare Bibliotheken müssen über eindeutige Group- und Artifact-IDs verfügen.
 
-**LT-010** Veröffentlichbare Bibliotheken und nicht veröffentlichbare Beispielanwendungen müssen build- und paketierungstechnisch sauber voneinander getrennt sein.
+**LT-011** Veröffentlichbare Bibliotheken und nicht veröffentlichbare Beispielanwendungen müssen build- und paketierungstechnisch sauber voneinander getrennt sein.
 
 ## 8.4 Monorepo und Multi-Client-Struktur
 
-**LT-011** Das Projekt muss als Monorepo aufgebaut sein.
+**LT-012** Das Projekt muss als Monorepo aufgebaut sein.
 
-**LT-012** Das Monorepo muss veröffentlichbare Bibliotheken, Adapter, technische Einstiegspunkte und Referenz-Clients organisatorisch und build-technisch klar trennen.
+**LT-013** Das Monorepo muss veröffentlichbare Bibliotheken, Adapter, technische Einstiegspunkte und Referenz-Clients organisatorisch und build-technisch klar trennen.
 
-**LT-013** Referenz-Clients dürfen die fachliche Kernlogik nicht duplizieren.
+**LT-014** Referenz-Clients dürfen die fachliche Kernlogik nicht duplizieren.
 
-**LT-014** Gemeinsame Build-, Test- und Versionsmechanismen müssen die koordinierte Entwicklung mehrerer Toolchains im Monorepo unterstützen.
+**LT-015** Gemeinsame Build-, Test- und Versionsmechanismen müssen die koordinierte Entwicklung mehrerer Toolchains im Monorepo unterstützen.
 
 ---
 
@@ -379,6 +385,7 @@ Für das Projekt gelten folgende Randbedingungen:
 * Für Toolchains mit plattformspezifischen Anforderungen müssen geeignete Entwicklungs- oder CI-Umgebungen vorgesehen werden.
 * Für MAUI-bezogene Entwicklungs- oder Validierungsschritte können Linux-basierte Community-Lösungen eingesetzt werden, sofern ihre Eignung für den konkreten Zweck sichergestellt ist.
 * Veröffentlichbare `d-browser`-Bibliotheken dürfen nicht ausschließlich an lokale oder private Repository-Nutzung gebunden sein.
+* Wenn Service-Schnittstellen bereitgestellt werden, sollen REST und gRPC als vorgesehene Integrationspfade unterstützt werden können.
 
 ---
 
@@ -439,6 +446,13 @@ Ein Benutzer oder Entwickler möchte `d-browser` über die im Monorepo enthalten
 **Erwartetes Ergebnis:**
 Die Referenz-Clients können definierte Systemfunktionen gegen dieselben fachlichen Schnittstellen oder Services demonstrieren, ohne eigene fachliche Sonderlogik einzuführen.
 
+## 13.8 Nutzung über gRPC
+
+Ein Benutzer oder ein externes System möchte `d-browser` über einen gRPC-Service ansprechen.
+
+**Erwartetes Ergebnis:**
+Die relevanten Systemfunktionen sind über definierte gRPC-Endpunkte nutzbar, ohne dass fachliche Logik separat für den gRPC-Zugang implementiert werden muss.
+
 ---
 
 # 14 Qualitätskriterien
@@ -475,6 +489,7 @@ Die Abnahme ist möglich, wenn nachgewiesen ist, dass:
 12. Referenz-Clients in Flutter, MAUI und SvelteKit im Repository vorhanden und an definierte Schnittstellen oder Services angebunden sind
 13. jeder Referenz-Client mindestens eine Schemaübersicht demonstrieren kann
 14. jeder Referenz-Client mindestens eine Datensatz- oder Tabellenansicht über dieselbe definierte Schnittstelle oder denselben definierten Service demonstrieren kann
+15. bei bereitgestellten Service-Schnittstellen dieselben fachlichen Funktionen über REST und gRPC konsistent zugreifbar sind
 
 ---
 
@@ -535,6 +550,7 @@ Die erste Ausbaustufe konzentriert sich auf:
 * Integrationsfähigkeit für `d-migrate`
 * veröffentlichbare Bibliotheksmodule für externe Einbindung
 * Monorepo-Struktur mit Referenz-UIs in Flutter, MAUI und SvelteKit
+* REST- und gRPC-basierte Service-Ansteuerung
 
 Damit entsteht eine belastbare Grundlage für einen technischen Browser-Service, der später um API, UI und weitere Quellen erweitert werden kann.
 
