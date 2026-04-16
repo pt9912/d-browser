@@ -174,12 +174,14 @@ Es besteht fachlich aus folgenden Kernbereichen:
 
 ## 6.1 Eingangsquellen
 
-`d-browser` soll Daten aus folgenden Quelltypen verarbeiten koennen:
+`d-browser` bindet relationale Quellen ueber `d-migrate` an; `d-migrate` stellt den JDBC-basierten Zugriff auf die jeweilige Datenbank bereit.
 
-* relationale Datenbanken ueber JDBC
-* durch `d-migrate` gelieferte Schema- oder Exportdaten
-* YAML-Dateien mit relationaler Struktur
-* JSON-Dateien mit relationaler Struktur
+Ueber diesen Integrationspfad koennen verarbeitet werden:
+
+* relationale Datenbanken, die von `d-migrate` ueber JDBC erschlossen werden
+* durch `d-migrate` gelieferte Schema- oder Exportdaten (JSON, YAML)
+
+Direkte datenbankspezifische Quellenadapter in `d-browser` sind nur als begruendeter Ausnahmefall vorgesehen.
 
 ## 6.2 Bereitstellungs- und Ausgabeschnittstellen
 

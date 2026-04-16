@@ -29,18 +29,42 @@ Nicht Teil dieses Dokuments:
 * Die fachlichen Vertraege entsprechen den Inbound Ports aus [architecture.md](architecture.md).
 * Fehler werden transportunabhaengig im Kern modelliert und auf gRPC-Status-Codes abgebildet.
 
+## Adressierung von Datenquellen
+
+`d-browser` bindet relationale Quellen ueber den `source-d-migrate`-Adapter (d-migrate ueber JDBC) an.
+Mehrere Quellen-Instanzen werden ueber ein Feld `source` in den jeweiligen Request-Messages adressiert.
+Ohne explizites `source`-Feld wird die in der Service-Konfiguration hinterlegte Standardquelle verwendet.
+
 ## Service-Oberflaeche (Entwurf)
 
 Die konkrete `.proto`-Definition ist noch offen.
 Vorgesehen sind mindestens die folgenden Service-Gruppen, abgeleitet aus den Anwendungsfaellen in [lastenheft.md](lastenheft.md) Kapitel 13:
 
-| Bereich         | Anwendungsfall                 | LF-Ref          |
-| --------------- | ------------------------------ | --------------- |
-| Schema          | Schema anzeigen                | LF-006, Kap. 13.1 |
-| Datensatz       | Datensatz laden                | LF-008, Kap. 13.2 |
+| Bereich         | Anwendungsfall                 | LF-Ref                       |
+| --------------- | ------------------------------ | ---------------------------- |
+| Schema          | Schema anzeigen                | LF-001, LF-002, Kap. 13.1    |
+| Datensatz       | Datensatz laden                | LF-008, LF-009, Kap. 13.2    |
 | Navigation      | Beziehungen navigieren         | LF-010 bis LF-013, Kap. 13.3 |
-| Export          | Baum als JSON / YAML abrufen   | LF-020, LF-021  |
-| Integration     | `d-migrate`-Quelle ansprechen  | LI-001 bis LI-005 |
+| Export          | Baum als JSON / YAML abrufen   | LF-020, LF-021               |
+| Integration     | `d-migrate`-Quelle ansprechen  | LI-001 bis LI-005            |
+
+### Methoden-Entwurf
+
+Die folgenden Methoden setzen 1:1 auf dieselben fachlichen Use Cases auf wie die REST-Endpunkte in [openapi.md](openapi.md) und erfuellen damit LT-004.
+
+| Service          | Methode            | Zweck                                                        | REST-Pendant                       | LF-Ref                                           |
+| ---------------- | ------------------ | ------------------------------------------------------------ | ---------------------------------- | ------------------------------------------------ |
+| `SchemaService`  | `ListSchemas`      | Liste der verfuegbaren Schemas der aktiven Quelle            | `GET /schemas`                     | LF-001, Kap. 13.1                                |
+| `SchemaService`  | `ListTables`       | Liste der Tabellen eines Schemas mit Basismetadaten          | `GET /schemas/{schema}/tables`     | LF-002, Kap. 13.1                                |
+| `RowService`     | `ListRows`         | Paginierte Datensaetze einer Tabelle                         | `GET /tables/{table}/rows`         | LF-008, LF-019, LN-003                           |
+| `RowService`     | `GetTree`          | Baumprojektion eines Datensatzes inklusive Beziehungen       | `GET /rows/{table}/{pk}/tree`      | LF-007, LF-010 bis LF-013, LF-017 bis LF-019, LF-020, Kap. 13.3 |
+| `RowService`     | `GetTreeYaml`      | YAML-Serialisierung desselben Baumes                         | `GET /rows/{table}/{pk}/yaml`      | LF-021, Kap. 13.5                                |
+
+Hinweise zum Entwurf:
+
+* Navigationstiefe und Zyklenbehandlung von `GetTree` werden ueber Request-Felder gesteuert (`depth`, `include_incoming`, `on_revisit`) und entsprechen den gleichnamigen Query-Parametern in [openapi.md](openapi.md).
+* Sammlungen (`ListSchemas`, `ListRows`) unterstuetzen Pagination gemaess Kapitel Querschnittsthemen.
+* Streaming-Varianten (z.B. `server streaming` fuer grosse Sammlungen) sind vorstellbar und als offener Punkt vermerkt.
 
 ## Fehlermodell
 
