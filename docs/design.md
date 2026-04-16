@@ -2,8 +2,10 @@
 
 ## 1 Zweck
 
-Dieses Dokument beschreibt den aktuellen Architektur- und Strukturentwurf fuer `d-browser`.
+Dieses Dokument beschreibt den aktuellen Modul-, Struktur- und Repository-Entwurf fuer `d-browser`.
 Es ergaenzt das Lastenheft [lastenheft.md](lastenheft.md) um konkrete Designentscheidungen, die nicht Teil der fachlichen Anforderungsbeschreibung sein sollen.
+
+Die logische Schichtenarchitektur, Verantwortlichkeiten und Integrationsprinzipien werden in [architecture.md](architecture.md) beschrieben.
 
 ## 2 Ausgangspunkt
 
@@ -25,14 +27,12 @@ Dieses Strukturmuster wird fuer `d-browser` uebernommen und um Referenz-Clients 
 
 ## 3 Leitprinzipien
 
-* Die fachliche Kernlogik bleibt von Infrastruktur, UI und konkreten Datenquellen getrennt.
-* Referenz-Clients konsumieren definierte Schnittstellen oder Services und enthalten keine fachliche Sonderlogik.
+* Referenz-Clients greifen ueber REST oder gRPC auf das `d-browser`-Backend zu und enthalten keine fachliche Sonderlogik.
 * Veroeffentlichbare Bibliotheken werden von Beispielanwendungen und technischen Einstiegspunkten sauber getrennt.
 * Die Modulstruktur bleibt nah an `d-migrate`, damit Integrationen und gemeinsame Konzepte konsistent bleiben.
 * Code und Klassen sollen testfreundlich entworfen werden, mit klaren Verantwortlichkeiten, geringer Kopplung und austauschbaren Abhaengigkeiten.
 * Fuer reproduzierbare Entwicklungs-, Test- und Integrationsumgebungen wird Docker bevorzugt eingesetzt.
 * Plattformabhaengige Toolchains sollen pragmatisch behandelt werden; dabei koennen auch Community-Loesungen genutzt werden, wenn sie fuer den vorgesehenen Zweck ausreichend tragfaehig sind.
-* Unterschiedliche Transportprotokolle wie REST und gRPC sollen auf denselben fachlichen Anwendungsfaellen aufsetzen.
 
 ## 3.1 Testbarkeit im Design
 
@@ -44,7 +44,7 @@ Daraus folgen insbesondere:
 * Abhaengigkeiten sollen ueber Ports, Interfaces oder klar austauschbare Komponenten angebunden werden.
 * Seiteneffekte wie I/O, Netzwerkzugriffe, Datenbankzugriffe und Zeitbezug sollen an den Rand des Systems verschoben werden.
 * Komplexe Logik soll in kleinen, deterministischen und isoliert pruefbaren Einheiten aufgebaut werden.
-* Referenz-Clients sollen Integrationsverhalten demonstrieren, aber keine schwer testbare fachliche Parallel-Logik einfuehren.
+* Referenz-Clients sollen das Verhalten des Backends ueber REST oder gRPC demonstrieren, aber keine schwer testbare fachliche Parallel-Logik einfuehren.
 
 ## 4 Zielstruktur des Monorepos
 
@@ -82,19 +82,19 @@ d-browser/
 
 ### 5.2 Adapter
 
+* `adapters/driven/source-common` enthaelt gemeinsam nutzbare technische Bausteine fuer Quellenanbindung und Integration.
 * `adapters/driven/source-d-migrate` ist der bevorzugte Integrationspfad fuer relationale Quellen, sofern `d-migrate` die benoetigten Datenbankadapter bereits als wiederverwendbare Libraries bereitstellt.
-* `adapters/driven/formats` enthaelt browser-spezifische technische Formatadaptionen, insbesondere fuer Ausgabe und Serialisierung.
+* `adapters/driven/formats` enthaelt projektspezifische technische Formatadaptionen fuer fachliche Exportformate wie JSON und YAML.
 * `adapters/driving/cli`, `adapters/driving/service-rest` und `adapters/driving/service-grpc` enthalten die technischen Einstiegspunkte fuer Benutzung und externe Ansteuerung.
-* REST- und gRPC-Adapter sollen dieselben fachlichen Anwendungsfaelle adressieren und sich nur im Transport und Vertragsformat unterscheiden.
 
 ### 5.3 Referenz-Clients
 
-* `examples/flutter` demonstriert die Anbindung aus einem Flutter-Client.
-* `examples/maui` demonstriert die Anbindung aus einem .NET-MAUI-Client.
-* `examples/sveltekit` demonstriert die Anbindung aus einem SvelteKit-Client.
+* `examples/flutter` demonstriert die Anbindung an das `d-browser`-Backend aus einem Flutter-Client.
+* `examples/maui` demonstriert die Anbindung an das `d-browser`-Backend aus einem .NET-MAUI-Client.
+* `examples/sveltekit` demonstriert die Anbindung an das `d-browser`-Backend aus einem SvelteKit-Client.
 
 Die Referenz-Clients sind nicht als veroeffentlichbare Bibliotheken gedacht.
-Sie dienen der Validierung von API, Integrationsfaehigkeit und Monorepo-Zuschnitt.
+Sie dienen der Validierung von REST- und gRPC-Anbindung, Integrationsfaehigkeit und Monorepo-Zuschnitt.
 
 ## 6 Designhinweise
 
@@ -103,6 +103,5 @@ Sie dienen der Validierung von API, Integrationsfaehigkeit und Monorepo-Zuschnit
 * Weitergehende Detailentscheidungen sollten bei Bedarf in ADRs oder ergaenzenden Designnotizen dokumentiert werden.
 * Lokale Infrastruktur, Integrationsabhaengigkeiten und wiederholbare Entwicklungsumgebungen sollen nach Moeglichkeit ueber Docker bereitgestellt werden.
 * Fuer MAUI-bezogene Entwicklungs- und Validierungsschritte koennen Linux-basierte Community-Ansaetze wie GTK-basierte Renderpfade beruecksichtigt werden, sofern ihre Einsatzgrenzen transparent bleiben.
-* Falls sowohl REST als auch gRPC angeboten werden, sollen gemeinsame Service- und Use-Case-Schichten unterhalb der Protokolladapter wiederverwendet werden.
 * Direkte datenbankspezifische Source-Adapter in `d-browser` sind nur dann vorgesehen, wenn `d-migrate` die benoetigte Funktionalitaet nicht in ausreichend wiederverwendbarer Form bereitstellt oder ein begruendeter technischer Sonderfall dies erforderlich macht.
 * Zusaetzliche Module wie `profiling` oder `streaming` sollen erst aufgenommen werden, wenn dafuer ein klarer fachlicher oder technischer Bedarf nachgewiesen ist.

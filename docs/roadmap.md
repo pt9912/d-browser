@@ -44,10 +44,10 @@ Ergebnis:
 
 | Bereich | Aufgabe | LF-Ref | Status |
 | ------- | ------- | ------ | ------ |
-| Example | Flutter-Example anbinden | LF-023, LF-024, LF-025 | offen |
-| Example | MAUI-Example anbinden | LF-023, LF-024, LF-025, LN-010 | offen |
-| Example | SvelteKit-Example anbinden | LF-023, LF-024, LF-025 | offen |
-| Validierung | Schemauebersicht und einfache Datensatz- oder Tabellenansicht in allen Examples demonstrieren | LF-024, LF-025 | offen |
+| Example | Flutter-Example ueber REST oder gRPC an das Backend anbinden | LF-023, LF-024, LF-025 | offen |
+| Example | MAUI-Example ueber REST oder gRPC an das Backend anbinden | LF-023, LF-024, LF-025, LN-010 | offen |
+| Example | SvelteKit-Example ueber REST oder gRPC an das Backend anbinden | LF-023, LF-024, LF-025 | offen |
+| Validierung | Schemauebersicht und einfache Datensatz- oder Tabellenansicht in allen Examples ueber REST oder gRPC demonstrieren | LF-024, LF-025 | offen |
 
 Ergebnis:
 

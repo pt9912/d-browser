@@ -193,7 +193,8 @@ Es besteht fachlich aus folgenden Kernbereichen:
 
 ## 6.3 Konsumenten und Referenz-Clients
 
-Die Referenz-Clients in Flutter, MAUI und SvelteKit sind Konsumenten definierter Systemfunktionen und Schnittstellen.
+Die Referenz-Clients in Flutter, MAUI und SvelteKit sind Frontends, die auf das `d-browser`-Backend zugreifen.
+Der Zugriff erfolgt ueber bereitgestellte REST- oder gRPC-Schnittstellen.
 Sie gehören zum Projektzuschnitt des Monorepos, sind jedoch keine Ausgabeschnittstellen des Kernsystems.
 
 Produktionsreife Endanwenderoberflächen sind nicht Bestandteil der ersten Ausbaustufe.
@@ -270,11 +271,11 @@ Produktionsreife Endanwenderoberflächen sind nicht Bestandteil der ersten Ausba
 
 **LF-022** Das System muss von `d-migrate` bereitgestellte Schema- oder Exportinformationen als Quelle nutzen können.
 
-**LF-023** Referenz-Clients müssen definierte Systemfunktionen über dieselben freigegebenen Schnittstellen oder Services konsumieren.
+**LF-023** Referenz-Clients muessen definierte Systemfunktionen ueber das `d-browser`-Backend konsumieren.
 
 **LF-024** Jeder Referenz-Client muss mindestens die Anzeige einer Schemaübersicht demonstrieren können.
 
-**LF-025** Jeder Referenz-Client muss mindestens das Laden einer Datensatz- oder Tabellenansicht über eine definierte Schnittstelle oder einen definierten Service demonstrieren können.
+**LF-025** Jeder Referenz-Client muss mindestens das Laden einer Datensatz- oder Tabellenansicht ueber REST oder gRPC demonstrieren koennen.
 
 **LF-026** Servicebasierte Integrationen sollen wahlweise über REST oder gRPC angebunden werden können.
 
@@ -444,7 +445,7 @@ Ein Benutzer möchte von `d-migrate` bereitgestellte Schema- oder Exportinformat
 Ein Benutzer oder Entwickler möchte `d-browser` über die im Monorepo enthaltenen Referenz-Clients in Flutter, MAUI oder SvelteKit ansprechen.
 
 **Erwartetes Ergebnis:**
-Die Referenz-Clients können definierte Systemfunktionen gegen dieselben fachlichen Schnittstellen oder Services demonstrieren, ohne eigene fachliche Sonderlogik einzuführen.
+Die Referenz-Clients koennen definierte Systemfunktionen ueber das `d-browser`-Backend mittels REST oder gRPC demonstrieren, ohne eigene fachliche Sonderlogik einzufuehren.
 
 ## 13.8 Nutzung über gRPC
 
@@ -486,9 +487,9 @@ Die Abnahme ist möglich, wenn nachgewiesen ist, dass:
 9. automatisierte Tests für die zentrale Tree-Logik vorhanden sind
 10. die vorgesehenen `d-browser`-Bibliotheken in einer Form gebaut werden können, die für eine Veröffentlichung über Maven Central geeignet ist
 11. eine Monorepo-Struktur vorhanden ist, die Kernmodule, Adapter, Service-Komponenten und Referenz-Clients klar trennt
-12. Referenz-Clients in Flutter, MAUI und SvelteKit im Repository vorhanden und an definierte Schnittstellen oder Services angebunden sind
+12. Referenz-Clients in Flutter, MAUI und SvelteKit im Repository vorhanden und an das `d-browser`-Backend ueber REST oder gRPC angebunden sind
 13. jeder Referenz-Client mindestens eine Schemaübersicht demonstrieren kann
-14. jeder Referenz-Client mindestens eine Datensatz- oder Tabellenansicht über dieselbe definierte Schnittstelle oder denselben definierten Service demonstrieren kann
+14. jeder Referenz-Client mindestens eine Datensatz- oder Tabellenansicht ueber REST oder gRPC demonstrieren kann
 15. bei bereitgestellten Service-Schnittstellen dieselben fachlichen Funktionen über REST und gRPC konsistent zugreifbar sind
 
 ---
