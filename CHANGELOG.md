@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * initial project documentation with lastenheft, design and roadmap
+* architecture view in `docs/architecture.md` describing layers, ports and integration principles
 * repository scaffolding files: `README.md`, `CHANGELOG.md`, `.gitignore`, `.dockerignore`
 
 ### Changed

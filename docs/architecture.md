@@ -146,6 +146,7 @@ Driven Adapter binden technische Quellen und Ausgabemechanismen an.
 Im aktuellen Zielbild sind insbesondere vorgesehen:
 
 * `source-d-migrate` als bevorzugter Integrationspfad fuer relationale Quellen
+* `source-common` als gemeinsam nutzbare technische Basis fuer Quellenadapter, ohne eigene vollstaendige Quellenimplementierung
 * `formats` fuer fachliche Exportformate wie JSON und YAML
 
 Direkte datenbankspezifische Quellenadapter in `d-browser` sind nur als Ausnahmefall vorgesehen.

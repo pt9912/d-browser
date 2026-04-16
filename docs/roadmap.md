@@ -23,6 +23,10 @@ Sie ergaenzt das Lastenheft [lastenheft.md](lastenheft.md) und das Designdokumen
 | Fachlogik | Grundlegende Baumprojektion und Datensatznavigation implementieren | LF-006 bis LF-019 | offen |
 | Ausgabe | JSON- und YAML-Ausgabe bereitstellen | LF-020, LF-021 | offen |
 
+In dieser Ausbaustufe gibt es noch keine technischen Einstiegspunkte (CLI, REST, gRPC).
+Die JSON- und YAML-Ausgabe wird daher ueber die programmatische API und automatisierte Tests validiert.
+Die Anbindung an konkrete Einstiegspunkte erfolgt in 0.2.0.
+
 Ergebnis:
 
 * Ein minimal nutzbarer fachlicher Kern mit ersten Tests und klaren Schnittstellen
@@ -84,11 +88,11 @@ Ergebnis:
 * Erweiterte Suche und Filterung
 * GraphQL
 * Weitergehende Visualisierung
-* Zusätzliche produktive Frontends
+* Zusaetzliche produktive Frontends
 
 ## Offene Punkte
 
 * Priorisierung der ersten konkret zu liefernden Use Cases
 * Reihenfolge von REST und gRPC im ersten Umsetzungszyklus
 * Umfang der ersten Referenz-Clients
-* Umfang der ersten veröffentlichbaren Bibliotheken
+* Umfang der ersten veroeffentlichbaren Bibliotheken

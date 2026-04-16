@@ -12,6 +12,7 @@ Die fachlichen und technischen Grundlagen werden derzeit in den Projektdokumente
 
 * Lastenheft: [docs/lastenheft.md](docs/lastenheft.md)
 * Design: [docs/design.md](docs/design.md)
+* Architecture: [docs/architecture.md](docs/architecture.md)
 * Roadmap: [docs/roadmap.md](docs/roadmap.md)
 
 ## Geplante Schwerpunkte

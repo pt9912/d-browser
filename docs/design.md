@@ -96,6 +96,14 @@ d-browser/
 Die Referenz-Clients sind nicht als veroeffentlichbare Bibliotheken gedacht.
 Sie dienen der Validierung von REST- und gRPC-Anbindung, Integrationsfaehigkeit und Monorepo-Zuschnitt.
 
+### 5.4 Unterstuetzende Bereiche
+
+* `docs/` enthaelt die projektbegleitende Dokumentation (Lastenheft, Design, Architektur, Roadmap).
+* `scripts/` enthaelt projektweite Skripte fuer Build-, Test-, Entwicklungs- und CI-Automatisierung, die toolchainuebergreifend genutzt werden.
+* `packaging/` enthaelt Artefakte und Konfigurationen fuer Paketierung, Container-Builds und die Vorbereitung veroeffentlichbarer Bibliotheken.
+
+Diese Bereiche enthalten keine Fachlogik und sind nicht selbst veroeffentlichbar.
+
 ## 6 Designhinweise
 
 * Die genaue Zahl der Module kann sich im Projektverlauf aendern.
