@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * architecture view in `docs/architecture.md` describing layers, ports and integration principles
 * gRPC service draft in `docs/grpc.md`
 * OpenAPI / REST contract draft in `docs/openapi.md` with initial endpoint outline
+* reference fixtures document `docs/fixtures.md` introducing Pagila (PostgreSQL) as the primary fixture for the first milestone
 * repository scaffolding files: `README.md`, `CHANGELOG.md`, `.gitignore`, `.dockerignore`
 
 ### Changed

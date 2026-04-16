@@ -594,6 +594,7 @@ Damit entsteht eine belastbare Grundlage fuer einen technischen Browser-Service,
 * Entwicklungsrichtung in [roadmap.md](roadmap.md)
 * gRPC-Service-Vertrag in [grpc.md](grpc.md)
 * OpenAPI-/REST-Vertrag in [openapi.md](openapi.md)
+* Referenz-Fixtures in [fixtures.md](fixtures.md)
 * Entwurf des kanonischen Domaenenmodells
 * Schnittstellenentwurf fuer Adapter und Use Cases
 * Konzept zur `d-migrate`-Integration

@@ -16,6 +16,7 @@ Die fachlichen und technischen Grundlagen werden derzeit in den Projektdokumente
 * Roadmap: [docs/roadmap.md](docs/roadmap.md)
 * gRPC-Vertrag: [docs/grpc.md](docs/grpc.md)
 * OpenAPI-Vertrag: [docs/openapi.md](docs/openapi.md)
+* Referenz-Fixtures: [docs/fixtures.md](docs/fixtures.md)
 
 ## Geplante Schwerpunkte
 
