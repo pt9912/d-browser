@@ -3,11 +3,11 @@
 ## 1 Zweck
 
 Dieses Dokument beschreibt den aktuellen Architektur- und Strukturentwurf fuer `d-browser`.
-Es ergaenzt das Lastenheft [lastenheft.md](/Development/d-browser/docs/lastenheft.md) um konkrete Designentscheidungen, die nicht Teil der fachlichen Anforderungsbeschreibung sein sollen.
+Es ergaenzt das Lastenheft [lastenheft.md](lastenheft.md) um konkrete Designentscheidungen, die nicht Teil der fachlichen Anforderungsbeschreibung sein sollen.
 
 ## 2 Ausgangspunkt
 
-Die Zielstruktur orientiert sich an der in `/Development/d-migrate` etablierten Trennung in:
+Die Zielstruktur orientiert sich an der im Repository [`pt9912/d-migrate`](https://github.com/pt9912/d-migrate) etablierten Trennung in:
 
 * `hexagon`
 * `adapters`

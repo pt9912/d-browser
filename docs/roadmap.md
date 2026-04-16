@@ -3,7 +3,7 @@
 ## Zweck
 
 Diese Roadmap beschreibt die geplanten Ausbaustufen von `d-browser` auf hoher Ebene.
-Sie ergaenzt das Lastenheft [lastenheft.md](/Development/d-browser/docs/lastenheft.md) und das Designdokument [design.md](/Development/d-browser/docs/design.md) um eine zeitliche und inhaltliche Entwicklungsrichtung.
+Sie ergaenzt das Lastenheft [lastenheft.md](lastenheft.md) und das Designdokument [design.md](design.md) um eine zeitliche und inhaltliche Entwicklungsrichtung.
 
 ## Leitgedanken
 

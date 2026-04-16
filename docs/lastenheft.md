@@ -576,7 +576,7 @@ Damit entsteht eine belastbare Grundlage für einen technischen Browser-Service,
 
 # 20 Anlagen
 
-* Architektur- und Strukturentwurf in [design.md](/Development/d-browser/docs/design.md)
+* Architektur- und Strukturentwurf in [design.md](design.md)
 * Entwurf des kanonischen Domänenmodells
 * Schnittstellenentwurf für Adapter und Use Cases
 * Konzept zur `d-migrate`-Integration
