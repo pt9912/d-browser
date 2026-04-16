@@ -580,6 +580,8 @@ Damit entsteht eine belastbare Grundlage fuer einen technischen Browser-Service,
 * Architektursicht in [architecture.md](architecture.md)
 * Modul- und Strukturentwurf in [design.md](design.md)
 * Entwicklungsrichtung in [roadmap.md](roadmap.md)
+* gRPC-Service-Vertrag in [grpc.md](grpc.md)
+* OpenAPI-/REST-Vertrag in [openapi.md](openapi.md)
 * Entwurf des kanonischen Domaenenmodells
 * Schnittstellenentwurf fuer Adapter und Use Cases
 * Konzept zur `d-migrate`-Integration

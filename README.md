@@ -14,6 +14,8 @@ Die fachlichen und technischen Grundlagen werden derzeit in den Projektdokumente
 * Design: [docs/design.md](docs/design.md)
 * Architecture: [docs/architecture.md](docs/architecture.md)
 * Roadmap: [docs/roadmap.md](docs/roadmap.md)
+* gRPC-Vertrag: [docs/grpc.md](docs/grpc.md)
+* OpenAPI-Vertrag: [docs/openapi.md](docs/openapi.md)
 
 ## Geplante Schwerpunkte
 

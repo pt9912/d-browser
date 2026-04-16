@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * initial project documentation with lastenheft, design and roadmap
 * architecture view in `docs/architecture.md` describing layers, ports and integration principles
+* gRPC service draft in `docs/grpc.md`
+* OpenAPI / REST contract draft in `docs/openapi.md` with initial endpoint outline
 * repository scaffolding files: `README.md`, `CHANGELOG.md`, `.gitignore`, `.dockerignore`
 
 ### Changed
