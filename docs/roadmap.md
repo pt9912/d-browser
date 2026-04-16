@@ -27,6 +27,9 @@ In dieser Ausbaustufe gibt es noch keine technischen Einstiegspunkte (CLI, REST,
 Die JSON- und YAML-Ausgabe wird daher ueber die programmatische API und automatisierte Tests validiert.
 Die Anbindung an konkrete Einstiegspunkte erfolgt in 0.2.0.
 
+Abhaengigkeit zu `d-migrate`: Der `source-d-migrate`-Adapter profitiert von zwei in `d-migrate` vorgesehenen Entkopplungsarbeiten (Profiling aus den Treiberkernen herausloesen, Read-/Write-Portflaechen trennen; siehe Coupling-Assessment im d-migrate-Repo).
+Solange diese Arbeiten offen sind, plant der Adapter gegen die heutige Portflaeche und haelt die Toolmodelle strikt im Adapter (Projektion auf eigene Fachmodelle).
+
 Ergebnis:
 
 * Ein minimal nutzbarer fachlicher Kern mit ersten Tests und klaren Schnittstellen

@@ -152,6 +152,17 @@ Im aktuellen Zielbild sind insbesondere vorgesehen:
 Direkte datenbankspezifische Quellenadapter in `d-browser` sind nur als Ausnahmefall vorgesehen.
 Transport- oder Protokollserialisierung fuer REST und gRPC gehoert nicht in `formats`, sondern in die jeweiligen Driving Adapter.
 
+#### Prinzipien fuer `source-d-migrate`
+
+Abgestimmt mit dem Coupling-Assessment im d-migrate-Repo (`d-migrate/docs/d-browser-integration-coupling-assessment.md`) gelten fuer den Adapter folgende Prinzipien:
+
+* Er konsumiert nur stabile Lesevertraege aus `d-migrate` (Schema- und Datenlesen).
+* Er projiziert `d-migrate`-Toolmodelle auf die fachlichen Modelle von `d-browser`; interne Tooldetails werden nicht an den Kern durchgereicht (LI-004).
+* Diagnostics des `SchemaReader`-Envelope (`notes`, `skippedObjects`) werden im Adapter gefiltert und nur bei Bedarf als optionale Diagnose weitergereicht.
+* Profiling-, Import- und CLI-Abhaengigkeiten aus `d-migrate` werden bewusst nicht in den Adapter gezogen.
+
+Parallel vorgesehene Entkopplungsarbeiten in `d-migrate` (Profiling aus Treiberkernen herausloesen, Read-/Write-Portflaechen trennen, FK-Dependency-Utility extrahieren) reduzieren diese Adapterlast perspektivisch, ohne die Prinzipien zu veraendern.
+
 ### 6. Driving Adapter
 
 Driving Adapter stellen die fachlichen Funktionen nach aussen bereit.

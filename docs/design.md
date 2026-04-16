@@ -84,8 +84,12 @@ d-browser/
 
 * `adapters/driven/source-common` enthaelt gemeinsam nutzbare technische Bausteine fuer Quellenanbindung und Integration.
 * `adapters/driven/source-d-migrate` ist der bevorzugte Integrationspfad fuer relationale Quellen, sofern `d-migrate` die benoetigten Datenbankadapter bereits als wiederverwendbare Libraries bereitstellt.
+  Der Adapter konsumiert stabile Lesevertraege, projiziert `d-migrate`-Toolmodelle auf die fachlichen Modelle von `d-browser` und zieht keine Profiling-, Import- oder CLI-Details mit (vgl. [architecture.md](architecture.md), Abschnitt Driven Adapter und das Coupling-Assessment im d-migrate-Repo).
 * `adapters/driven/formats` enthaelt projektspezifische technische Formatadaptionen fuer fachliche Exportformate wie JSON und YAML.
 * `adapters/driving/cli`, `adapters/driving/service-rest` und `adapters/driving/service-grpc` enthalten die technischen Einstiegspunkte fuer Benutzung und externe Ansteuerung.
+
+Row-Level-Baumprojektion und Zyklenerkennung liegen in der Verantwortung von `hexagon/core` und nicht im Adapter.
+Eine aus `d-migrate` moeglicherweise extrahierte FK-Dependency- oder Topo-Sort-Utility hilft nur bei Tabellenordnung und ersetzt die fachliche Baumlogik nicht.
 
 ### 5.3 Referenz-Clients
 

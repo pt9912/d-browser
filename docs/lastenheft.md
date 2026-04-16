@@ -339,6 +339,16 @@ Produktionsreife Endanwenderoberflaechen sind nicht Bestandteil der ersten Ausba
 
 **LI-005** Die Integration mit `d-migrate` muss ueber eine dedizierte und dokumentierte Integrationsschnittstelle oder einen dedizierten Integrationsadapter erfolgen.
 
+## 9.2 Abgestimmte Kopplungsannahmen
+
+Die konkreten Kopplungspunkte zwischen `d-browser` und `d-migrate` werden im Coupling-Assessment des `d-migrate`-Repos (`docs/d-browser-integration-coupling-assessment.md`) bewertet.
+Fuer `d-browser` gelten auf dieser Grundlage folgende Annahmen:
+
+* Der Adapter konsumiert nur stabile Lesevertraege; schreibende oder importbezogene Teile der `d-migrate`-Ports werden nicht genutzt.
+* Profiling-Belange werden nicht ueber den Adapter in `d-browser` gezogen.
+* Reverse-/Diagnostikinformationen aus `d-migrate` (z.B. `notes`, `skippedObjects`) werden im Adapter projiziert oder gefiltert.
+* Eine aus `d-migrate` extrahierbare FK-Topo-Sort-Utility darf fuer Tabellenordnung wiederverwendet werden, ersetzt aber nicht die Row-Level-Baumprojektion von `d-browser`.
+
 ---
 
 # 10 Nicht-Funktionsanforderungen

@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * project documentation refined with roadmap milestones, gRPC service scope and Docker-based development assumptions
 * OpenAPI and gRPC drafts aligned on snake_case query/request fields, shared source addressing and one-to-one method mapping
 * lastenheft section 6.1 consolidated: relational sources are reached exclusively through the `d-migrate` adapter (JDBC underneath)
+* documented the coupling assumptions negotiated with the d-migrate repo (Profiling/Read-Write split, diagnostics projection, FK topo-sort scope) across architecture, design, roadmap and lastenheft section 9.2
 
 ### Fixed
 
