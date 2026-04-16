@@ -22,7 +22,7 @@ Sie ergaenzt das Lastenheft [lastenheft.md](lastenheft.md) und das Designdokumen
 | Integration | Integrationspfad ueber `source-d-migrate` vorbereiten | LF-022, LI-001 bis LI-005 | offen |
 | Fachlogik | Grundlegende Baumprojektion und Datensatznavigation implementieren | LF-006 bis LF-019 | offen |
 | Ausgabe | JSON- und YAML-Ausgabe bereitstellen | LF-020, LF-021 | offen |
-| Fixture | Pagila (PostgreSQL) als erste Referenz-Fixture anbinden und fuer Tests/Validierung nutzbar machen (siehe [fixtures.md](fixtures.md)) | LF-001, LF-006 bis LF-019, LN-011 | offen |
+| Fixture | Pagila (PostgreSQL) als primaere Referenz-Fixture anbinden; Sakila (jOOQ, Multi-Dialekt) und Employees (datacharmer/test_db) als ergaenzende Fixtures fuer Gegenproben und Volumentests bereitstellen (siehe [fixtures.md](fixtures.md)) | LF-001, LF-004, LF-006 bis LF-019, LN-003, LN-011 | offen |
 
 In dieser Ausbaustufe gibt es noch keine technischen Einstiegspunkte (CLI, REST, gRPC).
 Die JSON- und YAML-Ausgabe wird daher ueber die programmatische API und automatisierte Tests validiert.
